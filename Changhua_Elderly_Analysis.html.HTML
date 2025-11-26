@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動畫式的彰化縣村里級熱圖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #F2F2F2; /* 全局背景改為柔和的莫蘭迪灰 */
+            color: #4A4A4A; /* 主要文字採用深灰色 */
+        }
+
+        .container {
+            border: 1px solid #B0B0B0; /* 柔和的灰色邊框 */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 初始陰影效果 */
+            background-color: #E8E8E8; /* 框框背景為淺灰色 */
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%; /* 框框寬度 */
+            max-width: 1200px; /* 框框最大寬度 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 平滑的動畫效果 */
+        }
+
+        /* 框框的懸停效果 */
+        .container:hover {
+            transform: translateY(-10px); /* 滑鼠懸停時，框框浮動 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 陰影效果加強 */
+            background-color: #e8e8dc; /* 滑鼠懸停時，背景變為淡莫蘭迪灰黃色 */
+        }
+
+        /* 禁止浮現與變色的框框 */
+        .no-hover {
+            transform: none;
+            box-shadow: none;
+            background-color: #E8E8E8; /* 保持背景色不變 */
+        }
+
+        .no-hover:hover {
+            transform: none; /* 不浮動 */
+            box-shadow: none; /* 無陰影變化 */
+            background-color: #E8E8E8; /* 無背景色變化 */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6D6D6D; /* 標題文字為中灰色 */
+        }
+
+        .introduction {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6D6D6D; /* 說明文字顏色與標題一致 */
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .column {
+            flex: 1;
+            border: 1px solid #B0B0B0; /* 每張圖的框邊使用柔和灰色 */
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* 柔和陰影效果 */
+            background-color: #F2F2F2; /* 圖片框背景改為更淺的灰色 */
+            padding: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 平滑的動畫效果 */
+        }
+
+        /* 圖片框的懸停效果 */
+        .column:hover {
+            transform: translateY(-5px); /* 滑鼠懸停時，框框浮動 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 陰影效果加強 */
+            background-color: #e8e8dc; /* 滑鼠懸停時，背景變為淡莫蘭迪灰黃色 */
+        }
+
+        .caption {
+            text-align: center;
+            font-size: 14px;
+            color: #8D8D8D; /* 更淺的灰色文字 */
+            margin-bottom: 10px;
+        }
+
+        .iframe-container {
+            text-align: center;
+            margin-bottom: 10px;
+            background-color: #E0E0E0; /* 圖表背景為柔和的灰色 */
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .summary {
+            border: 1px solid #B0B0B0; /* 總結框邊仍採用柔和灰 */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 初始陰影效果 */
+            background-color: #E8E8E8; /* 總結框背景為柔和淺灰 */
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #6D6D6D; /* 中灰色文字 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 平滑的動畫效果 */
+        }
+
+        /* 總結框的懸停效果 */
+        .summary:hover {
+            transform: translateY(-10px); /* 滑鼠懸停時，框框浮動 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 陰影效果加強 */
+            background-color: #e8e8dc; /* 滑鼠懸停時，背景變為淡莫蘭迪灰黃色 */
+        }
+
+        .bottom-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #B0B0B0; /* 柔和的灰色邊框 */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 初始陰影效果 */
+            background-color: #E8E8E8; /* 框框背景為淺灰色 */
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%; /* 與上方框框對齊 */
+            max-width: 1200px; /* 與上方框框對齊 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 平滑的動畫效果 */
+        }
+
+        /* 底部框框的懸停效果 */
+        .bottom-box:hover {
+            transform: translateY(-10px); /* 滑鼠懸停時，框框浮動 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 陰影效果加強 */
+            background-color: #e8e8dc; /* 滑鼠懸停時，背景變為淡莫蘭迪灰黃色 */
+        }
+
+        .bottom-box img {
+            flex-shrink: 0;
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 8px; /* 圖片邊緣圓角 */
+        }
+
+        .bottom-box .text {
+            color: #6D6D6D; /* 文字顏色 */
+            line-height: 1.8; /* 行距 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一個框框 -->
+    <div class="container">
+        <h1>動畫式的彰化縣村里級熱圖</h1>
+        <div class="introduction">
+            <p>透過游標滑動可動態查看該村里的老年人口分布總數，也可點擊縮小放大更好的查看該圖資訊。</p>
+        </div>
+    </div>
+
+    <!-- 第二個框框（圖片與總結框） -->
+    <div class="container no-hover">
+        <!-- 圖片與配文 -->
+        <div class="row">
+            <!-- 第一張圖 -->
+            <div class="column">
+                <div class="caption">此圖為彰化縣65-80歲老年人口分布熱圖</div>
+                <div class="iframe-container">
+                    <iframe src="https://plotdb.io/v/chart/37445" width="100%" height="600px" allowfullscreen="true" frameborder="0"></iframe>
+                </div>
+            </div>
+            <!-- 第二張圖 -->
+            <div class="column">
+                <div class="caption">此圖為彰化縣80-100歲老年人口分布熱圖</div>
+                <div class="iframe-container">
+                    <iframe src="https://plotdb.io/v/chart/37452" width="100%" height="600px" allowfullscreen="true" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 總結 -->
+        <div class="summary">
+            <p>根據兩張圖表顯示，彰化縣中老年人口比例最高的村里多集中於都市化程度較高的地區，例如彰化市及員林市。在65-80歲人口總數分布圖中，各村里的人口分布相對分散且總數差距明顯；
+               而在80-100歲人口總數分布圖中，各村里間的差距逐漸縮小，顯示老年人口隨著年齡增長而逐步減少。此外，推測這可能反映出高齡人口因健康、生活方便性和資源可及性等因素，更傾向集中於都市地區。</p>
+        </div>
+    </div>
+
+    <!-- 新增的底部框框 -->
+    <div class="bottom-box">
+        <img src="0506.jpeg" alt="我的家鄉">
+        <div class="text">
+            <p>我的家鄉老年人口總數高達21567人，雖然其中有不少長者行動仍相當靈活，但仍有許多剛退休的長者因生活重心轉變，面臨心理落差與空虛感，甚至影響身心健康。為了幫助這些長者重新找到生活重心與自我價值，我計畫結合自身對鋼琴的專長與熱情，在家鄉開設專為長者設計的鋼琴課程。課程將提供完善的鋼琴教室與設備，解決家中無鋼琴的困擾，並採取小班制教學，以彈性時間安排每周課程。內容涵蓋簡單指法、基本伴奏技巧，引導長輩逐步學會自彈自唱。這樣的課程不僅可以讓長者落實活到老學到老的目標，也能在課程中與其他長者交流，促進人際關係的連結，也期望透過此計畫能讓長者在音樂中找到成就感，重拾生活的樂趣與意義。</p>
+        </div>
+    </div>
+</body>
+</html>
