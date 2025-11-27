@@ -11,9 +11,9 @@
 **1. 彰化縣高齡化熱圖與創意點子競賽**
   * `資料來源`： 113年12月年齡人口統計_村里_彰化縣
   * `作品描述`： 透過 PlotDB 製作熱圖呈現老齡人口分佈，進行分析並提出解決議題，結合 Gamma AI 生成情境圖，提出長者鋼琴共學的社會設計提案。
-  * `作品連結`： [Changhua_Elderly_Analysis.html](https://shu-rui-0815.github.io/Data-Design/Changhua_Elderly_Analysis.html)
+  * `作品連結`： [Changhua_Elderly_Analysis.html](https://shu-rui-0815.github.io/Data-Design-Thinking/Changhua_Elderly_Analysis.html)
 
 **2. 台灣雨量互動分析儀表板**
   * `資料來源`： 氣象資料開放平台
   * `作品描述`： 將原始資料整理後，透過 Power BI 製作縣市與測站的互動式圖表
-  * `作品連結`： [Taiwan_Rainfall_PowerBI.html](https://shu-rui-0815.github.io/Data-Design/Taiwan_Rainfall_PowerBI.html)
+  * `作品連結`： [Taiwan_Rainfall_PowerBI.html](https://shu-rui-0815.github.io/Data-Design-Thinking/Taiwan_Rainfall_PowerBI.html)
